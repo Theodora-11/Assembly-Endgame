@@ -1,18 +1,43 @@
 import {languages} from '../../language'
 import React from 'react'
+import clsx from 'clsx'
 
 export default function Main() {
   
   const [currentWord, setCurrentWord] = React.useState('refactor');
+  const [guessLetters, setGuessLetters] = React.useState([]);
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-  const keyboardLetters = alphabet.split('').map((keyLetter, index) => (
-    <button key={index} className='keyboard-btn'>{keyLetter.toUpperCase()}</button>
-  )); 
+  const keyboardLetters = alphabet.split('').map((keyLetter, index) => {
+    const isGuess = guessLetters.includes(keyLetter);
+    const isCorrect = isGuess && currentWord.includes(keyLetter);
+    const isWrong = isGuess && !currentWord.includes(keyLetter);
+    const className = clsx({
+      correct: isCorrect,
+      wrong: isWrong,
+    })
+    
+    return(
+      <button 
+        key={index} 
+        className={className} 
+        onClick={() => guessChose(keyLetter)}
+      >
+        {keyLetter.toUpperCase()}
+      </button>
+    )
+  })
 
   const letters = currentWord.split('').map((letter, index) => (
     <span key={index} className="letter">{letter.toUpperCase()}</span>
-  ));
+  ))
+
+  function guessChose(keyLetter) {
+    setGuessLetters(prevLetter => 
+      prevLetter.includes(keyLetter)? prevLetter : [...prevLetter, keyLetter]
+    )
+  }
+  
 
   const languageBtn = languages.map(objLang => {
     const style = {
@@ -30,6 +55,8 @@ export default function Main() {
       </button>
     )
   })
+
+
 
   return(
     <main>
@@ -50,6 +77,7 @@ export default function Main() {
         {keyboardLetters}
       </section>
       <button className="new-game-btn">New game</button>
+
     </main>
   )
 }

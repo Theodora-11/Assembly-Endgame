@@ -110,18 +110,27 @@ header {
   justify-content: center;
   gap: 6px;
   margin-top: clamp(1rem, 2vw, 2rem);
-
-  & > .keyboard-btn {
-    width: 32px;
-    height: 32px;
-    font-size: clamp(1rem, 3vw, 1.1rem);
-    border-radius: 3px;
-    border-style: none;
-    outline: 1px solid white;
-    background-color: rgb(241, 200, 104);
-    cursor: pointer;
-  }
 }
+
+.keyboard-box > button {
+  width: 32px;
+  height: 32px;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  border-radius: 3px;
+  border-style: none;
+  outline: 1px solid white;
+  background-color: rgb(241, 200, 104);
+  cursor: pointer;
+}
+
+.keyboard-box > button.correct {
+  background-color: green;
+}
+
+.keyboard-box > button.wrong {
+  background-color: red;
+}
+
 
 .new-game-btn {
   color: white;
@@ -134,3 +143,4 @@ header {
   font-size: clamp(1rem, 3vw, 1.1rem);
   background-color: #328AF1;
 }
+
