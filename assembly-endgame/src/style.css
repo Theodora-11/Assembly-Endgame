@@ -76,12 +76,29 @@ header {
  justify-content: center;
  gap: 5px;
 
-  & > .language-btn {
-    border-radius: 5px;
-    padding: 0.4em;
-    font-size: clamp(1rem, 3vw, 1.1rem);
-    border-style: none;
-  }
+}
+
+button.language-btn {
+  border-radius: 5px;
+  padding: 0.4em;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  border-style: none;
+  position: relative;
+}
+
+button.language-btn.delete::before {
+  position: absolute;
+  content: '💀';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  font-size: 0.85rem;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
 }
 
 .words-box {
@@ -101,6 +118,7 @@ header {
     background-color:rgba(54, 53, 53, 0.616);
     border-bottom: 1px solid  rgb(231, 231, 231);
   }
+
 }
 
 .keyboard-box {

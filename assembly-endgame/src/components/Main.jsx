@@ -6,7 +6,7 @@ export default function Main() {
   
   const [currentWord, setCurrentWord] = React.useState('refactor');
   const [guessLetters, setGuessLetters] = React.useState([]);
-  const wrongGuessCount = guessLetters.filter(letter => !currentWord.includes(letter));
+  const wrongGuessCount = guessLetters.filter(letter => !currentWord.includes(letter)).length;
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
   const keyboardLetters = alphabet.split('').map((keyLetter, index) => {
@@ -41,17 +41,20 @@ export default function Main() {
     )
   }
 
-  const languageBtn = languages.map(objLang => {
+  const languageBtn = languages.map((objLang, index) => {
+    const isLanguageDeleted = index < wrongGuessCount;
     const style = {
       backgroundColor: objLang.backgroundColor,
       color: objLang.color
     }
 
+    const className = clsx('language-btn', isLanguageDeleted && 'delete');
+
     return (
       <button 
         key={objLang.name} 
         style={style}
-        className='language-btn'
+        className={className}
       >
         {objLang.name}
       </button>
