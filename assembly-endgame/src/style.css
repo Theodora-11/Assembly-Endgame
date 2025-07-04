@@ -1,0 +1,136 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.wrapper-project {
+  background-color: rgb(30, 29, 29);
+  border-radius: 10px;
+  margin-inline: auto;
+  margin-top: 0.5rem;
+  max-width: 600px;
+  outline: 5px solid rgb(169, 168, 168);
+  padding: 10px;
+  width: 95%;
+  margin-top: clamp(0px, 4vw, 3.5rem);
+}
+
+header {
+  text-align: center;
+
+  & > p {
+    color: rgb(153, 153, 153);
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    width: 100%;
+    max-width: 350px;
+    margin-inline: auto;
+    margin-top: -10px;
+    line-height: 18px;
+  }
+
+  & > h1 {
+    color: rgb(231, 231, 231);
+    font-weight: 500;
+    white-space: nowrap;
+    word-break: normal; 
+    margin: 5px 0 1.5rem;
+  }
+}
+
+.state-box {
+  background-color: #10A95B;
+  border-radius: 5px;
+  color:  rgb(231, 231, 231);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-inline: auto;
+  text-align: center;
+
+  & > h2, p {
+    margin: 0;
+    padding: 0;
+  }
+
+  & > p {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+  }
+}
+
+
+.buttons-box {
+ margin-top: 1rem;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ gap: 5px;
+
+  & > .language-btn {
+    border-radius: 5px;
+    padding: 0.4em;
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    border-style: none;
+  }
+}
+
+.words-box {
+  color: rgb(231, 231, 231);
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+
+  & > .letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color:rgba(54, 53, 53, 0.616);
+    border-bottom: 1px solid  rgb(231, 231, 231);
+  }
+}
+
+.keyboard-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: clamp(1rem, 2vw, 2rem);
+
+  & > .keyboard-btn {
+    width: 32px;
+    height: 32px;
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    border-radius: 3px;
+    border-style: none;
+    outline: 1px solid white;
+    background-color: rgb(241, 200, 104);
+    cursor: pointer;
+  }
+}
+
+.new-game-btn {
+  color: white;
+  display: block;
+  margin: clamp(1rem, 5vw, 2rem) auto;
+  border-style: none;
+  border-radius: 4px;
+  width: 40%;
+  padding: 6px;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  background-color: #328AF1;
+}
