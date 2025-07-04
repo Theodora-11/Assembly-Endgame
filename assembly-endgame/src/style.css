@@ -121,16 +121,19 @@ header {
   outline: 1px solid white;
   background-color: rgb(241, 200, 104);
   cursor: pointer;
+
 }
 
 .keyboard-box > button.correct {
-  background-color: green;
+  background-color: #10A95B;
 }
 
 .keyboard-box > button.wrong {
-  background-color: red;
+  background-color: #EC5D49;
 }
-
+.keyboard-box > button:hover {
+  transform: scale(1.1);
+}
 
 .new-game-btn {
   color: white;
