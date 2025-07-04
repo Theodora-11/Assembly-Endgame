@@ -6,6 +6,7 @@ export default function Main() {
   
   const [currentWord, setCurrentWord] = React.useState('refactor');
   const [guessLetters, setGuessLetters] = React.useState([]);
+  const wrongGuessCount = guessLetters.filter(letter => !currentWord.includes(letter));
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
   const keyboardLetters = alphabet.split('').map((keyLetter, index) => {
@@ -29,7 +30,9 @@ export default function Main() {
   })
 
   const letters = currentWord.split('').map((letter, index) => (
-    <span key={index} className="letter">{letter.toUpperCase()}</span>
+    <span key={index} className="letter">
+      {guessLetters.includes(letter) ? letter.toUpperCase() : ''}
+    </span>
   ))
 
   function guessChose(keyLetter) {
@@ -37,7 +40,6 @@ export default function Main() {
       prevLetter.includes(keyLetter)? prevLetter : [...prevLetter, keyLetter]
     )
   }
-  
 
   const languageBtn = languages.map(objLang => {
     const style = {
