@@ -3,11 +3,17 @@ import React from 'react'
 import clsx from 'clsx'
 
 export default function Main() {
-  
+  // State values
   const [currentWord, setCurrentWord] = React.useState('refactor');
   const [guessLetters, setGuessLetters] = React.useState([]);
+
+  //Derived values
   const wrongGuessCount = guessLetters.filter(letter => !currentWord.includes(letter)).length;
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const gameWon = currentWord.split('').every(letter => guessLetters.includes(letter));
+  const gameLost = wrongGuessCount === languages.length - 1; 
+  const gameOver = gameWon || gameLost;
+
 
   const keyboardLetters = alphabet.split('').map((keyLetter, index) => {
     const isGuess = guessLetters.includes(keyLetter);
@@ -61,13 +67,34 @@ export default function Main() {
     )
   })
 
-
+  const gameStatus = clsx('state-box', {
+    won: gameWon,
+    lost: gameLost
+  })
 
   return(
     <main>
-      <section className="state-box">
-        <h2 className="state-type">You win!</h2>
-        <p className="state-text">Well done!</p>
+
+      <section className={gameStatus}>
+        {gameOver ? (
+          gameWon? (
+            <>
+              <h2 className="state-type">You win!</h2>
+              <p className="state-text">Well done!</p>
+            </>
+          ) : (
+            <>
+              <h2 className="state-type">Game over!</h2>
+              <p className="state-text">You lose! Better start learning Assembly!</p>
+            </>
+          )
+          
+        ) : (
+          <>
+            <h2 className="state-type">Enjoy the Game!</h2>
+            <p className="state-text">You can do it!</p>
+          </>
+        )}
       </section>
 
       <section className="buttons-box">
@@ -81,7 +108,7 @@ export default function Main() {
       <section className="keyboard-box">
         {keyboardLetters}
       </section>
-      <button className="new-game-btn">New game</button>
+      {gameOver && <button className="new-game-btn">New game</button>}
 
     </main>
   )
