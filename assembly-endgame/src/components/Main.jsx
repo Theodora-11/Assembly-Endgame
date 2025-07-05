@@ -1,6 +1,7 @@
-import {languages} from '../../language'
+import { languages } from '../../language'
 import React from 'react'
 import clsx from 'clsx'
+import { getFarewellText } from '../../utils'
 
 export default function Main() {
   // State values
@@ -8,11 +9,14 @@ export default function Main() {
   const [guessLetters, setGuessLetters] = React.useState([]);
 
   //Derived values
+  const numGuessesLeft = languages.length - 1
   const wrongGuessCount = guessLetters.filter(letter => !currentWord.includes(letter)).length;
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
   const gameWon = currentWord.split('').every(letter => guessLetters.includes(letter));
   const gameLost = wrongGuessCount === languages.length - 1; 
   const gameOver = gameWon || gameLost;
+  const lastGuessLetter = guessLetters[guessLetters.length -1];
+  const isLastLetterIncorrect = lastGuessLetter && !currentWord.includes(lastGuessLetter);
 
 
   const keyboardLetters = alphabet.split('').map((keyLetter, index) => {
@@ -26,6 +30,9 @@ export default function Main() {
     
     return(
       <button 
+        disabled={gameOver}
+        aria-disabled={guessLetters.includes(keyLetter)}
+        aria-label={`Letter ${keyLetter}`}
         key={index} 
         className={className} 
         onClick={() => guessChose(keyLetter)}
@@ -68,12 +75,9 @@ export default function Main() {
   })
 
   function checkGameStatus() {
-    if(!gameOver) {
+    if(!gameOver && isLastLetterIncorrect) {
       return (
-        <>
-          <h2 className="state-type">Enjoy the Game!</h2>
-          <p className="state-text">You can do it!</p>
-        </>
+        <p className="bye">{getFarewellText(languages[wrongGuessCount - 1].name)}</p>
       )
     }
 
@@ -84,7 +88,9 @@ export default function Main() {
           <p className="state-text">Well done!</p>
         </>
       )
-    } else {
+    }
+
+    if(gameLost) {
       return(
         <>
           <h2 className="state-type">Game over!</h2>
@@ -92,11 +98,14 @@ export default function Main() {
         </>
       )
     }
+
+    return null
   }
 
   const gameStatus = clsx('state-box', {
     won: gameWon,
-    lost: gameLost
+    lost: gameLost,
+    bye: !gameOver && isLastLetterIncorrect,
   })
 
   return(
@@ -113,6 +122,26 @@ export default function Main() {
       <section className="words-box">
         {letters}
       </section>
+
+      <section 
+        className="sr-only" 
+        aria-live="polite" 
+        role="status"
+      >
+        <p>
+          {currentWord.includes(lastGuessLetter) ? 
+            `Correct! The letter ${lastGuessLetter} is in the word.` : 
+            `Sorry, the letter ${lastGuessLetter} is not in the word.`
+          }
+          You have {numGuessesLeft} attempts left.
+        </p>
+
+        <p>Current word: {currentWord.split("").map(letter => 
+        guessLetters.includes(letter) ? letter + "." : "blank.")
+        .join(" ")}
+        </p>
+      </section>
+
 
       <section className="keyboard-box">
         {keyboardLetters}
