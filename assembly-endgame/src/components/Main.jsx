@@ -144,6 +144,7 @@ export default function Main() {
 
 
       <section className="keyboard-box">
+        
         {keyboardLetters}
       </section>
       {gameOver && <button className="new-game-btn">New game</button>}
