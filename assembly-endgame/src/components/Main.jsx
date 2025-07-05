@@ -67,6 +67,33 @@ export default function Main() {
     )
   })
 
+  function checkGameStatus() {
+    if(!gameOver) {
+      return (
+        <>
+          <h2 className="state-type">Enjoy the Game!</h2>
+          <p className="state-text">You can do it!</p>
+        </>
+      )
+    }
+
+    if(gameWon) {
+      return(
+        <>
+          <h2 className="state-type">You win!</h2>
+          <p className="state-text">Well done!</p>
+        </>
+      )
+    } else {
+      return(
+        <>
+          <h2 className="state-type">Game over!</h2>
+          <p className="state-text">You lose! Better start learning Assembly!</p>
+        </>
+      )
+    }
+  }
+
   const gameStatus = clsx('state-box', {
     won: gameWon,
     lost: gameLost
@@ -76,25 +103,7 @@ export default function Main() {
     <main>
 
       <section className={gameStatus}>
-        {gameOver ? (
-          gameWon? (
-            <>
-              <h2 className="state-type">You win!</h2>
-              <p className="state-text">Well done!</p>
-            </>
-          ) : (
-            <>
-              <h2 className="state-type">Game over!</h2>
-              <p className="state-text">You lose! Better start learning Assembly!</p>
-            </>
-          )
-          
-        ) : (
-          <>
-            <h2 className="state-type">Enjoy the Game!</h2>
-            <p className="state-text">You can do it!</p>
-          </>
-        )}
+        {checkGameStatus()}
       </section>
 
       <section className="buttons-box">
