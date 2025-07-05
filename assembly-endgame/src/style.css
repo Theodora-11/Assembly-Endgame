@@ -49,7 +49,7 @@ header {
 }
 
 .state-box {
-  background-color: #10A95B;
+  background-color: rgb(92, 92, 92);
   border-radius: 5px;
   color:  rgb(231, 231, 231);
   display: flex;
@@ -57,6 +57,7 @@ header {
   gap: 2px;
   margin-inline: auto;
   text-align: center;
+  padding: 0px 0px 3px;
 
   & > h2, p {
     margin: 0;
@@ -66,6 +67,14 @@ header {
   & > p {
     font-size: clamp(1rem, 3vw, 1.1rem);
   }
+}
+
+.state-box.won {
+  background-color: green;
+}
+
+.state-box.lost {
+  background-color: red;
 }
 
 
@@ -128,6 +137,7 @@ button.language-btn.delete::before {
   justify-content: center;
   gap: 6px;
   margin-top: clamp(1rem, 2vw, 2rem);
+  margin-bottom: 1rem;
 }
 
 .keyboard-box > button {
