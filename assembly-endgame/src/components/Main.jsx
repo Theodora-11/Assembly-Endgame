@@ -2,6 +2,7 @@ import { languages } from '../../language'
 import { getFarewellText, getRandomWords } from '../../utils'
 import React from 'react'
 import clsx from 'clsx'
+import Confetti from 'react-confetti'
 
 
 export default function Main() {
@@ -121,6 +122,13 @@ export default function Main() {
 
   return(
     <main>
+      {gameWon && 
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          gravity={0.2}
+      />}
+
 
       <section className={gameStatus}>
         {checkGameStatus()}
