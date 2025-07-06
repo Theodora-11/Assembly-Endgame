@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
 main {
@@ -54,10 +55,13 @@ header {
   color:  rgb(231, 231, 231);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0px;
   margin-inline: auto;
   text-align: center;
   padding: 0px 0px 3px;
+  height: 54px;
 
   & > h2, p {
     margin: 0;
@@ -78,6 +82,8 @@ header {
 }
 
 .state-box.bye {
+  margin: 0;
+  padding: 0;
   background-color: #7A5EA7;
   border: 1px dashed rgb(231, 231, 231);
 }
@@ -129,17 +135,20 @@ button.language-btn.delete::before {
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
+}
 
-  & > .letter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color:rgba(54, 53, 53, 0.616);
-    border-bottom: 1px solid  rgb(231, 231, 231);
-  }
+.words-box > span.letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color:rgba(54, 53, 53, 0.616);
+  border-bottom: 1px solid  rgb(231, 231, 231);
+}
 
+.letter.missed-letters {
+  color: #EC5D49;
 }
 
 .keyboard-box {

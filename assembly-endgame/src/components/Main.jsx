@@ -1,11 +1,12 @@
 import { languages } from '../../language'
+import { getFarewellText, getRandomWords } from '../../utils'
 import React from 'react'
 import clsx from 'clsx'
-import { getFarewellText } from '../../utils'
+
 
 export default function Main() {
   // State values
-  const [currentWord, setCurrentWord] = React.useState('refactor');
+  const [currentWord, setCurrentWord] = React.useState(() => getRandomWords());
   const [guessLetters, setGuessLetters] = React.useState([]);
 
   //Derived values
@@ -42,11 +43,16 @@ export default function Main() {
     )
   })
 
-  const letters = currentWord.split('').map((letter, index) => (
-    <span key={index} className="letter">
-      {guessLetters.includes(letter) ? letter.toUpperCase() : ''}
-    </span>
-  ))
+  const letters = currentWord.split('').map((letter, index) => {
+    const showLetters = gameLost || guessLetters.includes(letter);
+    const showLetterStyle = clsx('letter', gameLost && !guessLetters.includes(letter) && 'missed-letters');
+
+    return(
+      <span key={index} className={showLetterStyle}>
+        {(guessLetters.includes(letter) || gameLost)? letter.toUpperCase() : ''}
+      </span>
+    )
+  })
 
   function guessChose(keyLetter) {
     setGuessLetters(prevLetter => 
@@ -102,6 +108,11 @@ export default function Main() {
     return null
   }
 
+  function resetGame() {
+    setCurrentWord(() => getRandomWords());
+    setGuessLetters([]);
+  }
+
   const gameStatus = clsx('state-box', {
     won: gameWon,
     lost: gameLost,
@@ -144,10 +155,9 @@ export default function Main() {
 
 
       <section className="keyboard-box">
-        
         {keyboardLetters}
       </section>
-      {gameOver && <button className="new-game-btn">New game</button>}
+      {gameOver && <button className="new-game-btn" onClick={resetGame}>New game</button>}
 
     </main>
   )
